@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+const clone=x=>structuredClone(x),local={},memory={};let listener,alarm;
+const area=data=>({get:async keys=>Object.fromEntries((Array.isArray(keys)?keys:[keys]).map(k=>[k,clone(data[k])])),set:async d=>Object.assign(data,clone(d)),setAccessLevel:async()=>{}});
+globalThis.chrome={storage:{local:area(local),session:area(memory)},sidePanel:{setPanelBehavior:async()=>{}},alarms:{create:async()=>{},onAlarm:{addListener:f=>alarm=f}},runtime:{id:'test-extension',onInstalled:{addListener:()=>{}},onStartup:{addListener:()=>{}},onMessage:{addListener:f=>listener=f}},tabs:{query:async()=>[{id:7,url:'https://app.zoom.us/wc/123'}]}};
+const send=(type,payload={},sender={id:'test-extension'})=>new Promise(resolve=>listener({type,...payload},sender,resolve));
+const until=async fn=>{for(let i=0;i<300;i++){if(fn())return;await new Promise(r=>setTimeout(r,5));}throw Error('Timed out waiting for worker');};
+const active=()=>local.sessions.find(s=>s.id===local.activeId);
+test('worker serializes captures, rejects stale AI results, isolates sessions and resumes persisted jobs',async()=>{
+  await import('../src/background.js');await send('GET');
+  await send('SETTINGS',{settings:{provider:'offline',autoAnalyze:false}});
+  await Promise.all(Array.from({length:30},(_,i)=>send('APPEND',{items:[{speaker:'A',text:`The system shall return item ${i}.`,eventId:`e${i}`}]})));
+  assert.equal(active().transcript.length,30);
+  await send('ANALYZE');await until(()=>active().analysisRevision===active().revision);assert.equal(active().baseline.length,30);
+  await send('START_CAPTURE');const id=active().id;
+  const untrusted=await send('CAPTURE_BATCH',{sessionId:id,items:[{text:'bad'}]},{tab:{id:7},url:'https://zoom.us.attacker.example'});assert.equal(untrusted.ok,false);
+  const wrongTab=await send('CAPTURE_BATCH',{sessionId:id,items:[{text:'bad'}]},{tab:{id:99},url:'https://app.zoom.us/wc/123'});assert.equal(wrongTab.accepted,false);
+  let release,calls=0;
+  globalThis.fetch=async(url,init)=>{
+    calls++;const input=JSON.parse(JSON.parse(init.body).input);if(calls===1)await new Promise(r=>release=r);
+    const requirements=input.transcript.map(t=>({id:'R-'+t.id,type:'FR',category:'Functional',title:t.text,statement:t.text,acceptanceCriteria:'',sourceIds:[t.id],answerIds:[],openIssues:['Acceptance criteria not defined']}));
+    return {ok:true,json:async()=>({status:'completed',output:[{content:[{type:'output_text',text:JSON.stringify({questions:[],requirements})}]}]})};
+  };
+  await send('SETTINGS',{settings:{provider:'openai',model:'test',allowRemote:true,autoAnalyze:true},key:'test-only'});await send('ANALYZE');await until(()=>!!release);
+  await send('APPEND',{items:[{text:'The system shall export a PDF.',eventId:'late'}]});assert.equal(active().transcript.length,31);
+  release();await until(()=>!active().job);assert.equal(active().analysisRevision,active().revision);assert.equal(active().baseline.length,31);assert.ok(calls>=2);
+  const old=active().id;await send('NEW',{title:'Separate meeting'});assert.equal(active().transcript.length,0);assert.equal(local.sessions.find(s=>s.id===old).capture.active,false);
+  const stale=await send('CAPTURE_BATCH',{sessionId:old,items:[{text:'Late packet'}]},{tab:{id:7},url:'https://app.zoom.us/wc/123'});assert.equal(stale.accepted,false);
+  await send('SETTINGS',{settings:{provider:'offline',autoAnalyze:false}});await send('APPEND',{items:[{text:'The interface should be fast.'}]});active().job={status:'working'};alarm({name:'reqai-resume'});await until(()=>!active().job);assert.ok(active().questions.length);
+  assert.ok(!JSON.stringify(local).includes('test-only'),'API key must not persist in local state');
+});

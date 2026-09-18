@@ -1,0 +1,23 @@
+Hiring Manager: We need to build an AI-based resume analyzer that can automatically shortlist candidates for our software engineering roles.
+ML Engineer: Okay. How should the system decide which candidates to shortlist?
+Hiring Manager: It should rank them based on relevance to the job description.
+ML Engineer: How are we defining relevance?
+Hiring Manager: Mainly skills and experience. And overall profile strength.
+ML Engineer: What does overall profile strength include?
+Hiring Manager: Things like good companies, solid projects, impactful work.
+ML Engineer: Should we prioritize years of experience?
+Hiring Manager: Yes, but not strictly. Sometimes a strong fresher is better than someone with 5 average years.
+ML Engineer: Do we have historical hiring data to train the system?
+Hiring Manager: We have past resumes and hiring decisions, but they’re not very structured.
+ML Engineer: How accurate should the system be?
+Hiring Manager: It should be good enough so that HR trusts it.
+ML Engineer: Do we need explainability? For example, why a candidate was ranked higher?
+Hiring Manager: Yes, that would be useful.
+ML Engineer: Are there any constraints regarding bias or fairness?
+Hiring Manager: Yes, we must avoid bias, especially related to gender or college background.
+ML Engineer: Should the system process resumes in real-time or batch mode?
+Hiring Manager: It shouldn’t be slow.
+ML Engineer: What is the expected response time per resume?
+Hiring Manager: Ideally quick.
+ML Engineer: What is the timeline for delivery?
+Hiring Manager: We need an MVP soon.

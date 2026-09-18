@@ -1,0 +1,380 @@
+Resume analyzer · simulated worked example
+ReqAI · Requirement analysis report
+Generated: 9/18/2026, 1:42:16 AM | Session: 5e1a87a6-7204-4fc5-a4db-9db30cc782e9
+Analysis engine: Offline rules | Assignment case study; sample answers, if applied, are simulated.
+Analysis status: Up to date
+
+1. Executive summary
+
+23 statements; 7 clarification questions; 7 answered.
+Baseline: 25; clarified: 85; change: +60 percentage points. Scores are rubric indicators, not independently validated quality claims.
+
+2. Clarification log
+
+
+1. What response-time percentile, maximum latency, workload and batch throughput must the system support?
+
+Category: Performance; sources: T19, T21; status: answered
+Reason: Response time, percentile and workload are not fully specified.
+Answer: The system shall process 95% of individual PDF resumes within 2 seconds under 100 concurrent users. A 500-resume batch shall finish within 10 minutes. Verify with a repeatable load test using the agreed resume dataset.
+Recorded by: Sample stakeholder; origin: SIMULATED EXAMPLE; answer ID: 311dde7e-585a-4ff4-9f76-594684df959c
+
+2. Which evidence and scoring weights determine relevance, and how should experience and fresher candidates be treated?
+
+Category: Functional; sources: T3, T5, T7, T9; status: answered
+Reason: The scoring rubric and evidence rules are undefined.
+Answer: The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Recorded by: Sample stakeholder; origin: SIMULATED EXAMPLE; answer ID: 6e376afa-5bad-4c01-84f0-d333eeb0a7f6
+
+3. Which accuracy metric, acceptance threshold and representative labelled evaluation dataset will determine acceptance?
+
+Category: Reliability; sources: T13; status: answered
+Reason: Acceptance threshold and evaluation dataset are missing.
+Answer: Before release, the system shall achieve Precision@20 of at least 85% on 200 held-out resumes independently labelled by two hiring reviewers. The system shall display uncertain cases for human review rather than automatically rejecting them.
+Recorded by: Sample stakeholder; origin: SIMULATED EXAMPLE; answer ID: e76ccd4b-3d4a-4079-b473-df144bb865dc
+
+4. Which protected attributes, fairness metric, threshold and audit process should be used, and who reviews failures?
+
+Category: Fairness; sources: T17; status: answered
+Reason: Fairness measures and failure handling are unspecified.
+Answer: The system shall exclude names, gender, photographs and college names from ranking features. On the agreed test set, the absolute true-positive-rate difference between evaluated groups shall not exceed 5 percentage points. A fairness reviewer shall inspect failures before release. Verify feature exclusion and group metrics with the labelled audit dataset.
+Recorded by: Sample stakeholder; origin: SIMULATED EXAMPLE; answer ID: 8a1e0a67-69e5-42c5-922f-75aaa3985e5d
+
+5. What data formats, labelling process, consent requirements and missing-data handling are required before training or evaluation?
+
+Category: Functional; sources: T11; status: answered
+Reason: Data preparation and validation rules are missing.
+Answer: The system shall accept text-based PDF and DOCX resumes. The system shall reject unreadable files with an actionable error and shall store reviewer-approved labels separately from the held-out evaluation set. Historical hiring decisions shall not be treated as objective ground truth without review.
+Recorded by: Sample stakeholder; origin: SIMULATED EXAMPLE; answer ID: a53e78cb-6a78-4325-8c4e-023089f7a724
+
+6. What explanation must accompany each ranking, for which users, and how will its correctness be checked?
+
+Category: Explainability; sources: T15; status: answered
+Reason: Explanation content and verification are undefined.
+Answer: The system shall display the matched skills, missing mandatory skills and contribution of each scoring component for every ranked candidate. Reviewers shall verify these explanations against the input resume and published rubric on 30 test cases.
+Recorded by: Sample stakeholder; origin: SIMULATED EXAMPLE; answer ID: e259e3fb-2dc0-4fcc-8099-b4427f26a370
+
+7. What is the exact delivery date, minimum release scope and explicit out-of-scope list?
+
+Category: Scope; sources: T23; status: answered
+Reason: Delivery boundary and scope are unspecified.
+Answer: The initial release shall be delivered within 6 weeks of stakeholder approval and shall include PDF/DOCX import, job-description entry, candidate ranking, explanations and human review. Automatic rejection and external applicant-tracking integrations are out of scope.
+Recorded by: Sample stakeholder; origin: SIMULATED EXAMPLE; answer ID: f9e8a51a-5187-465b-ab5e-d06ed74ce429
+
+3. Without clarification
+
+
+R-T1 · FR · We need to build an AI-based resume analyzer that can automatically shortlist ca
+
+Category: Functional
+We need to build an AI-based resume analyzer that can automatically shortlist candidates for our software engineering roles.
+Acceptance criteria: Not specified
+Open issues: Confirm observable acceptance criteria with the stakeholder.
+Sources: T1 | Answers: None
+
+R-T3 · FR · It should rank them based on relevance to the job description.
+
+Category: Functional
+It should rank them based on relevance to the job description.
+Acceptance criteria: Not specified
+Open issues: The scoring rubric and evidence rules are undefined.
+Sources: T3 | Answers: None
+
+R-T5 · FR · Mainly skills and experience. And overall profile strength.
+
+Category: Functional
+Mainly skills and experience. And overall profile strength.
+Acceptance criteria: Not specified
+Open issues: The scoring rubric and evidence rules are undefined.
+Sources: T5 | Answers: None
+
+R-T7 · FR · Things like good companies, solid projects, impactful work.
+
+Category: Functional
+Things like good companies, solid projects, impactful work.
+Acceptance criteria: Not specified
+Open issues: The scoring rubric and evidence rules are undefined.
+Sources: T7 | Answers: None
+
+R-T9 · FR · Yes, but not strictly. Sometimes a strong fresher is better than someone with 5 
+
+Category: Functional
+Yes, but not strictly. Sometimes a strong fresher is better than someone with 5 average years.
+Acceptance criteria: Not specified
+Open issues: The scoring rubric and evidence rules are undefined.
+Sources: T8, T9 | Answers: None
+
+R-T11 · FR · We have past resumes and hiring decisions, but they’re not very structured.
+
+Category: Functional
+We have past resumes and hiring decisions, but they’re not very structured.
+Acceptance criteria: Not specified
+Open issues: Data preparation and validation rules are missing.
+Sources: T11 | Answers: None
+
+R-T13 · NFR · It should be good enough so that HR trusts it.
+
+Category: Reliability
+It should be good enough so that HR trusts it.
+Acceptance criteria: Not specified
+Open issues: Acceptance threshold and evaluation dataset are missing.
+Sources: T13 | Answers: None
+
+R-T15 · NFR · Yes, that would be useful.
+
+Category: Explainability
+Yes, that would be useful.
+Acceptance criteria: Not specified
+Open issues: Explanation content and verification are undefined.
+Sources: T14, T15 | Answers: None
+
+R-T17 · NFR · Yes, we must avoid bias, especially related to gender or college background.
+
+Category: Fairness
+Yes, we must avoid bias, especially related to gender or college background.
+Acceptance criteria: Not specified
+Open issues: Fairness measures and failure handling are unspecified.
+Sources: T16, T17 | Answers: None
+
+R-T19 · NFR · It shouldn’t be slow.
+
+Category: Performance
+It shouldn’t be slow.
+Acceptance criteria: Not specified
+Open issues: Response time, percentile and workload are not fully specified.
+Sources: T19 | Answers: None
+
+R-T21 · NFR · Ideally quick.
+
+Category: Performance
+Ideally quick.
+Acceptance criteria: Not specified
+Open issues: Response time, percentile and workload are not fully specified.
+Sources: T21 | Answers: None
+
+R-T23 · Constraint · We need an MVP soon.
+
+Category: Scope
+We need an MVP soon.
+Acceptance criteria: Not specified
+Open issues: Delivery boundary and scope are unspecified.
+Sources: T23 | Answers: None
+
+4. With clarification
+
+
+R-T1 · FR · We need to build an AI-based resume analyzer that can automatically shortlist ca
+
+Category: Functional
+We need to build an AI-based resume analyzer that can automatically shortlist candidates for our software engineering roles.
+Acceptance criteria: Not specified
+Open issues: Confirm observable acceptance criteria with the stakeholder.
+Sources: T1 | Answers: None
+
+R-T3 · FR · It should rank them based on relevance to the job description.
+
+Category: Functional
+The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Acceptance criteria: The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Open issues: None recorded; still requires human review.
+Sources: T3 | Answers: 6e376afa-5bad-4c01-84f0-d333eeb0a7f6
+
+R-T5 · FR · Mainly skills and experience. And overall profile strength.
+
+Category: Functional
+The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Acceptance criteria: The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Open issues: None recorded; still requires human review.
+Sources: T5 | Answers: 6e376afa-5bad-4c01-84f0-d333eeb0a7f6
+
+R-T7 · FR · Things like good companies, solid projects, impactful work.
+
+Category: Functional
+The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Acceptance criteria: The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Open issues: None recorded; still requires human review.
+Sources: T7 | Answers: 6e376afa-5bad-4c01-84f0-d333eeb0a7f6
+
+R-T9 · FR · Yes, but not strictly. Sometimes a strong fresher is better than someone with 5 
+
+Category: Functional
+The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Acceptance criteria: The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Open issues: None recorded; still requires human review.
+Sources: T8, T9 | Answers: 6e376afa-5bad-4c01-84f0-d333eeb0a7f6
+
+R-T11 · FR · We have past resumes and hiring decisions, but they’re not very structured.
+
+Category: Functional
+The system shall accept text-based PDF and DOCX resumes. The system shall reject unreadable files with an actionable error and shall store reviewer-approved labels separately from the held-out evaluation set. Historical hiring decisions shall not be treated as objective ground truth without review.
+Acceptance criteria: The system shall accept text-based PDF and DOCX resumes. The system shall reject unreadable files with an actionable error and shall store reviewer-approved labels separately from the held-out evaluation set. Historical hiring decisions shall not be treated as objective ground truth without review.
+Open issues: None recorded; still requires human review.
+Sources: T11 | Answers: a53e78cb-6a78-4325-8c4e-023089f7a724
+
+R-T13 · NFR · It should be good enough so that HR trusts it.
+
+Category: Reliability
+Before release, the system shall achieve Precision@20 of at least 85% on 200 held-out resumes independently labelled by two hiring reviewers. The system shall display uncertain cases for human review rather than automatically rejecting them.
+Acceptance criteria: Before release, the system shall achieve Precision@20 of at least 85% on 200 held-out resumes independently labelled by two hiring reviewers. The system shall display uncertain cases for human review rather than automatically rejecting them.
+Open issues: None recorded; still requires human review.
+Sources: T13 | Answers: e76ccd4b-3d4a-4079-b473-df144bb865dc
+
+R-T15 · NFR · Yes, that would be useful.
+
+Category: Explainability
+The system shall display the matched skills, missing mandatory skills and contribution of each scoring component for every ranked candidate. Reviewers shall verify these explanations against the input resume and published rubric on 30 test cases.
+Acceptance criteria: The system shall display the matched skills, missing mandatory skills and contribution of each scoring component for every ranked candidate. Reviewers shall verify these explanations against the input resume and published rubric on 30 test cases.
+Open issues: None recorded; still requires human review.
+Sources: T14, T15 | Answers: e259e3fb-2dc0-4fcc-8099-b4427f26a370
+
+R-T17 · NFR · Yes, we must avoid bias, especially related to gender or college background.
+
+Category: Fairness
+The system shall exclude names, gender, photographs and college names from ranking features. On the agreed test set, the absolute true-positive-rate difference between evaluated groups shall not exceed 5 percentage points. A fairness reviewer shall inspect failures before release. Verify feature exclusion and group metrics with the labelled audit dataset.
+Acceptance criteria: The system shall exclude names, gender, photographs and college names from ranking features. On the agreed test set, the absolute true-positive-rate difference between evaluated groups shall not exceed 5 percentage points. A fairness reviewer shall inspect failures before release. Verify feature exclusion and group metrics with the labelled audit dataset.
+Open issues: None recorded; still requires human review.
+Sources: T16, T17 | Answers: 8a1e0a67-69e5-42c5-922f-75aaa3985e5d
+
+R-T19 · NFR · It shouldn’t be slow.
+
+Category: Performance
+The system shall process 95% of individual PDF resumes within 2 seconds under 100 concurrent users. A 500-resume batch shall finish within 10 minutes. Verify with a repeatable load test using the agreed resume dataset.
+Acceptance criteria: The system shall process 95% of individual PDF resumes within 2 seconds under 100 concurrent users. A 500-resume batch shall finish within 10 minutes. Verify with a repeatable load test using the agreed resume dataset.
+Open issues: None recorded; still requires human review.
+Sources: T19 | Answers: 311dde7e-585a-4ff4-9f76-594684df959c
+
+R-T21 · NFR · Ideally quick.
+
+Category: Performance
+The system shall process 95% of individual PDF resumes within 2 seconds under 100 concurrent users. A 500-resume batch shall finish within 10 minutes. Verify with a repeatable load test using the agreed resume dataset.
+Acceptance criteria: The system shall process 95% of individual PDF resumes within 2 seconds under 100 concurrent users. A 500-resume batch shall finish within 10 minutes. Verify with a repeatable load test using the agreed resume dataset.
+Open issues: None recorded; still requires human review.
+Sources: T21 | Answers: 311dde7e-585a-4ff4-9f76-594684df959c
+
+R-T23 · Constraint · We need an MVP soon.
+
+Category: Scope
+The initial release shall be delivered within 6 weeks of stakeholder approval and shall include PDF/DOCX import, job-description entry, candidate ranking, explanations and human review. Automatic rejection and external applicant-tracking integrations are out of scope.
+Acceptance criteria: The initial release shall be delivered within 6 weeks of stakeholder approval and shall include PDF/DOCX import, job-description entry, candidate ranking, explanations and human review. Automatic rejection and external applicant-tracking integrations are out of scope.
+Open issues: None recorded; still requires human review.
+Sources: T23 | Answers: f9e8a51a-5187-465b-ab5e-d06ed74ce429
+
+5. Evaluation and paired comparison
+
+clarity: baseline 0 → clarified 58
+completeness: baseline 0 → clarified 92
+verifiability: baseline 0 → clarified 92
+traceability: baseline 100 → clarified 100
+
+R-T1
+
+Before: We need to build an AI-based resume analyzer that can automatically shortlist candidates for our software engineering roles.
+After: We need to build an AI-based resume analyzer that can automatically shortlist candidates for our software engineering roles.
+Checks: clarity: review; completeness: review; verifiability: review; traceability: pass
+
+R-T3
+
+Before: It should rank them based on relevance to the job description.
+After: The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Checks: clarity: review; completeness: pass; verifiability: pass; traceability: pass
+
+R-T5
+
+Before: Mainly skills and experience. And overall profile strength.
+After: The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Checks: clarity: review; completeness: pass; verifiability: pass; traceability: pass
+
+R-T7
+
+Before: Things like good companies, solid projects, impactful work.
+After: The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Checks: clarity: review; completeness: pass; verifiability: pass; traceability: pass
+
+R-T9
+
+Before: Yes, but not strictly. Sometimes a strong fresher is better than someone with 5 average years.
+After: The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+Checks: clarity: review; completeness: pass; verifiability: pass; traceability: pass
+
+R-T11
+
+Before: We have past resumes and hiring decisions, but they’re not very structured.
+After: The system shall accept text-based PDF and DOCX resumes. The system shall reject unreadable files with an actionable error and shall store reviewer-approved labels separately from the held-out evaluation set. Historical hiring decisions shall not be treated as objective ground truth without review.
+Checks: clarity: pass; completeness: pass; verifiability: pass; traceability: pass
+
+R-T13
+
+Before: It should be good enough so that HR trusts it.
+After: Before release, the system shall achieve Precision@20 of at least 85% on 200 held-out resumes independently labelled by two hiring reviewers. The system shall display uncertain cases for human review rather than automatically rejecting them.
+Checks: clarity: pass; completeness: pass; verifiability: pass; traceability: pass
+
+R-T15
+
+Before: Yes, that would be useful.
+After: The system shall display the matched skills, missing mandatory skills and contribution of each scoring component for every ranked candidate. Reviewers shall verify these explanations against the input resume and published rubric on 30 test cases.
+Checks: clarity: pass; completeness: pass; verifiability: pass; traceability: pass
+
+R-T17
+
+Before: Yes, we must avoid bias, especially related to gender or college background.
+After: The system shall exclude names, gender, photographs and college names from ranking features. On the agreed test set, the absolute true-positive-rate difference between evaluated groups shall not exceed 5 percentage points. A fairness reviewer shall inspect failures before release. Verify feature exclusion and group metrics with the labelled audit dataset.
+Checks: clarity: pass; completeness: pass; verifiability: pass; traceability: pass
+
+R-T19
+
+Before: It shouldn’t be slow.
+After: The system shall process 95% of individual PDF resumes within 2 seconds under 100 concurrent users. A 500-resume batch shall finish within 10 minutes. Verify with a repeatable load test using the agreed resume dataset.
+Checks: clarity: pass; completeness: pass; verifiability: pass; traceability: pass
+
+R-T21
+
+Before: Ideally quick.
+After: The system shall process 95% of individual PDF resumes within 2 seconds under 100 concurrent users. A 500-resume batch shall finish within 10 minutes. Verify with a repeatable load test using the agreed resume dataset.
+Checks: clarity: pass; completeness: pass; verifiability: pass; traceability: pass
+
+R-T23
+
+Before: We need an MVP soon.
+After: The initial release shall be delivered within 6 weeks of stakeholder approval and shall include PDF/DOCX import, job-description entry, candidate ranking, explanations and human review. Automatic rejection and external applicant-tracking integrations are out of scope.
+Checks: clarity: pass; completeness: pass; verifiability: pass; traceability: pass
+
+6. Evaluation method and limits
+
+Each requirement earns one point per check: clarity (no detected vague words, placeholders or open issues); completeness (statement and acceptance criteria, no open issues); verifiability (observable action for FRs or number for NFRs/constraints in acceptance criteria); traceability (valid transcript and answer IDs). Each dimension is the percentage passing; overall is the mean. Change is measured in percentage points.
+This English-language text rubric does not verify semantic correctness, realistic thresholds, fairness, feasibility, security or compliance. AI output and offline drafts require stakeholder review. Offline rules do not provide general AI reasoning. Unanswered questions are not stakeholder approvals.
+
+7. Source transcript
+
+T1 [case-study] Hiring Manager: We need to build an AI-based resume analyzer that can automatically shortlist candidates for our software engineering roles.
+T2 [case-study] ML Engineer: Okay. How should the system decide which candidates to shortlist?
+T3 [case-study] Hiring Manager: It should rank them based on relevance to the job description.
+T4 [case-study] ML Engineer: How are we defining relevance?
+T5 [case-study] Hiring Manager: Mainly skills and experience. And overall profile strength.
+T6 [case-study] ML Engineer: What does overall profile strength include?
+T7 [case-study] Hiring Manager: Things like good companies, solid projects, impactful work.
+T8 [case-study] ML Engineer: Should we prioritize years of experience?
+T9 [case-study] Hiring Manager: Yes, but not strictly. Sometimes a strong fresher is better than someone with 5 average years.
+T10 [case-study] ML Engineer: Do we have historical hiring data to train the system?
+T11 [case-study] Hiring Manager: We have past resumes and hiring decisions, but they’re not very structured.
+T12 [case-study] ML Engineer: How accurate should the system be?
+T13 [case-study] Hiring Manager: It should be good enough so that HR trusts it.
+T14 [case-study] ML Engineer: Do we need explainability? For example, why a candidate was ranked higher?
+T15 [case-study] Hiring Manager: Yes, that would be useful.
+T16 [case-study] ML Engineer: Are there any constraints regarding bias or fairness?
+T17 [case-study] Hiring Manager: Yes, we must avoid bias, especially related to gender or college background.
+T18 [case-study] ML Engineer: Should the system process resumes in real-time or batch mode?
+T19 [case-study] Hiring Manager: It shouldn’t be slow.
+T20 [case-study] ML Engineer: What is the expected response time per resume?
+T21 [case-study] Hiring Manager: Ideally quick.
+T22 [case-study] ML Engineer: What is the timeline for delivery?
+T23 [case-study] Hiring Manager: We need an MVP soon.
+
+8. Answer revision history
+
+2026-09-17T20:12:16.225Z | 311dde7e-585a-4ff4-9f76-594684df959c | Sample stakeholder (simulated) | Previous: None | New: The system shall process 95% of individual PDF resumes within 2 seconds under 100 concurrent users. A 500-resume batch shall finish within 10 minutes. Verify with a repeatable load test using the agreed resume dataset.
+2026-09-17T20:12:16.225Z | 6e376afa-5bad-4c01-84f0-d333eeb0a7f6 | Sample stakeholder (simulated) | Previous: None | New: The system shall rank candidates using 50% job-skill match, 30% verified project evidence and 20% relevant experience. Company prestige and college name shall not be ranking features. Freshers shall be assessed using the same skill and project rubric. Verify the ordering against 30 stakeholder-approved example pairs.
+2026-09-17T20:12:16.225Z | e76ccd4b-3d4a-4079-b473-df144bb865dc | Sample stakeholder (simulated) | Previous: None | New: Before release, the system shall achieve Precision@20 of at least 85% on 200 held-out resumes independently labelled by two hiring reviewers. The system shall display uncertain cases for human review rather than automatically rejecting them.
+2026-09-17T20:12:16.225Z | 8a1e0a67-69e5-42c5-922f-75aaa3985e5d | Sample stakeholder (simulated) | Previous: None | New: The system shall exclude names, gender, photographs and college names from ranking features. On the agreed test set, the absolute true-positive-rate difference between evaluated groups shall not exceed 5 percentage points. A fairness reviewer shall inspect failures before release. Verify feature exclusion and group metrics with the labelled audit dataset.
+2026-09-17T20:12:16.225Z | a53e78cb-6a78-4325-8c4e-023089f7a724 | Sample stakeholder (simulated) | Previous: None | New: The system shall accept text-based PDF and DOCX resumes. The system shall reject unreadable files with an actionable error and shall store reviewer-approved labels separately from the held-out evaluation set. Historical hiring decisions shall not be treated as objective ground truth without review.
+2026-09-17T20:12:16.225Z | e259e3fb-2dc0-4fcc-8099-b4427f26a370 | Sample stakeholder (simulated) | Previous: None | New: The system shall display the matched skills, missing mandatory skills and contribution of each scoring component for every ranked candidate. Reviewers shall verify these explanations against the input resume and published rubric on 30 test cases.
+2026-09-17T20:12:16.225Z | f9e8a51a-5187-465b-ab5e-d06ed74ce429 | Sample stakeholder (simulated) | Previous: None | New: The initial release shall be delivered within 6 weeks of stakeholder approval and shall include PDF/DOCX import, job-description entry, candidate ranking, explanations and human review. Automatic rejection and external applicant-tracking integrations are out of scope.
