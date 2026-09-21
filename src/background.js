@@ -17,12 +17,12 @@ async function init(){
   await chrome.storage.session.setAccessLevel({accessLevel:'TRUSTED_CONTEXTS'});
   await transaction(async()=>save(await load()));
   await chrome.sidePanel.setPanelBehavior({openPanelOnActionClick:true});
-  await chrome.alarms.create('reqai-resume',{periodInMinutes:0.5});
+  await chrome.alarms.create('clariflow-resume',{periodInMinutes:0.5});
 }
 const ready=init();
 chrome.runtime.onInstalled.addListener(()=>ready.catch(()=>{}));
 chrome.runtime.onStartup.addListener(()=>ready.catch(()=>{}));
-chrome.alarms.onAlarm.addListener(a=>{if(a.name==='reqai-resume')void pump();});
+chrome.alarms.onAlarm.addListener(a=>{if(a.name==='clariflow-resume')void pump();});
 async function pump(){
   await ready;if(running)return;running=true;
   try {

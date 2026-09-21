@@ -26,6 +26,6 @@ test('worker serializes captures, rejects stale AI results, isolates sessions an
   release();await until(()=>!active().job);assert.equal(active().analysisRevision,active().revision);assert.equal(active().baseline.length,31);assert.ok(calls>=2);
   const old=active().id;await send('NEW',{title:'Separate meeting'});assert.equal(active().transcript.length,0);assert.equal(local.sessions.find(s=>s.id===old).capture.active,false);
   const stale=await send('CAPTURE_BATCH',{sessionId:old,items:[{text:'Late packet'}]},{tab:{id:7},url:'https://app.zoom.us/wc/123'});assert.equal(stale.accepted,false);
-  await send('SETTINGS',{settings:{provider:'offline',autoAnalyze:false}});await send('APPEND',{items:[{text:'The interface should be fast.'}]});active().job={status:'working'};alarm({name:'reqai-resume'});await until(()=>!active().job);assert.ok(active().questions.length);
+  await send('SETTINGS',{settings:{provider:'offline',autoAnalyze:false}});await send('APPEND',{items:[{text:'The interface should be fast.'}]});active().job={status:'working'};alarm({name:'clariflow-resume'});await until(()=>!active().job);assert.ok(active().questions.length);
   assert.ok(!JSON.stringify(local).includes('test-only'),'API key must not persist in local state');
 });

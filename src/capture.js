@@ -1,5 +1,5 @@
 (() => {
-  if(globalThis.__reqaiV2)return;globalThis.__reqaiV2=true;
+  if(globalThis.__clariflowV2)return;globalThis.__clariflowV2=true;
   const selectors=['.transcription-list-item','.transcription-item','.transcript-item','[data-testid="transcript-item"]','.closed-caption-window','.closed-caption-container','.cc-container','[data-testid="caption-text"]','.chat-message__content','[data-testid="chat-message-content"]'];
   let active=false,sessionId=null,pending=[],sending=false,lastError='',seen=new WeakMap(),streams=new Map();
   const normalize=s=>(s||'').replace(/\s+/g,' ').trim();
@@ -37,8 +37,8 @@
   let badge;
   function updateBadge(){
     if(window!==window.top)return;
-    if(!badge){badge=document.createElement('div');badge.id='reqai-capture-badge';badge.style.cssText='position:fixed;bottom:20px;right:20px;z-index:2147483647;padding:10px 16px;border-radius:24px;background:#142d30;color:white;font:12px system-ui;box-shadow:0 4px 18px #0004;pointer-events:none';document.documentElement.append(badge);}
-    badge.textContent=lastError?`ReqAI · ${lastError}`:active?`ReqAI · Capturing captions${pending.length?' · '+pending.length+' queued':''}`:'ReqAI · Capture paused';
+    if(!badge){badge=document.createElement('div');badge.id='clariflow-capture-badge';badge.style.cssText='position:fixed;bottom:20px;right:20px;z-index:2147483647;padding:10px 16px;border-radius:24px;background:#142d30;color:white;font:12px system-ui;box-shadow:0 4px 18px #0004;pointer-events:none';document.documentElement.append(badge);}
+    badge.textContent=lastError?`Clariflow · ${lastError}`:active?`Clariflow · Capturing captions${pending.length?' · '+pending.length+' queued':''}`:'Clariflow · Capture paused';
   }
   async function status(){
     try{const r=await chrome.runtime.sendMessage({type:'CAPTURE_STATUS'});if(!r?.ok)return;

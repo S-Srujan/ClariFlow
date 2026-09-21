@@ -2,7 +2,7 @@
 
 ## 1. Runtime boundaries
 
-ReqAI is a local Chrome extension. The Zoom content script, background service worker, dashboard, and report page have distinct responsibilities. The content script can submit caption batches and query capture state, but cannot read the extension's stored transcripts or API keys. The service worker restricts storage to trusted extension contexts and checks incoming message origins and active capture tab/session IDs.
+Clariflow is a local Chrome extension. The Zoom content script, background service worker, dashboard, and report page have distinct responsibilities. The content script can submit caption batches and query capture state, but cannot read the extension's stored transcripts or API keys. The service worker restricts storage to trusted extension contexts and checks incoming message origins and active capture tab/session IDs.
 
 No remote scripts, CDN styles, dynamic code execution or runtime npm packages are used. Untrusted transcript and provider strings are escaped before HTML rendering. DOCX XML is separately escaped. JSON-schema validation rejects unknown source IDs, duplicate requirement IDs and invalid types.
 

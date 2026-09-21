@@ -1,14 +1,44 @@
 {
   "manifest_version": 3,
-  "name": "ReqAI • Requirement Workbench",
-  "version": "2.0.0",
+  "name": "Clariflow",
+  "version": "2.0.1",
   "minimum_chrome_version": "116",
-  "description": "Capture Zoom transcripts, clarify stakeholder needs, and produce traceable requirements with auditable quality comparisons.",
-  "permissions": ["storage", "alarms", "sidePanel", "activeTab"],
-  "host_permissions": ["https://*.zoom.us/*", "https://api.openai.com/*", "https://generativelanguage.googleapis.com/*"],
-  "background": {"service_worker": "src/background.js", "type": "module"},
-  "action": {"default_title": "Open ReqAI workbench"},
-  "side_panel": {"default_path": "index.html"},
-  "content_scripts": [{"matches": ["https://*.zoom.us/*"], "js": ["src/capture.js"], "run_at": "document_idle", "all_frames": true}],
-  "content_security_policy": {"extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"}
+  "description": "Turn conversations into clear requirements. Analyze Zoom transcripts, ask clarifying questions, and generate traceable FRs and NFRs.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "sidePanel",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://*.zoom.us/*",
+    "https://api.openai.com/*",
+    "https://generativelanguage.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Open Clariflow workbench"
+  },
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.zoom.us/*"
+      ],
+      "js": [
+        "src/capture.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"
+  },
+  "short_name": "Clariflow"
 }

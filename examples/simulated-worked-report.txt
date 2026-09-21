@@ -1,5 +1,5 @@
 Resume analyzer · simulated worked example
-ReqAI · Requirement analysis report
+Clariflow · Requirement analysis report
 Generated: 9/18/2026, 1:42:16 AM | Session: 5e1a87a6-7204-4fc5-a4db-9db30cc782e9
 Analysis engine: Offline rules | Assignment case study; sample answers, if applied, are simulated.
 Analysis status: Up to date

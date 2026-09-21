@@ -2,7 +2,7 @@ import {comparison} from './core.js';
 export const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function reportLines(s) {
   const e=comparison(s),lines=[];const add=(style,text)=>lines.push({style,text:String(text??'')});
-  add('Title',s.title);add('Subtitle','ReqAI · Requirement analysis report');
+  add('Title',s.title);add('Subtitle','Clariflow · Requirement analysis report');
   add('Normal',`Generated: ${new Date().toLocaleString()} | Session: ${s.id}`);
   add('Normal',`Analysis engine: ${s.analysisProvider||'Not analyzed'} | ${s.demo?'Assignment case study; sample answers, if applied, are simulated.':'Meeting session'}`);
   add('Normal',`Analysis status: ${s.analysisRevision===s.revision?'Up to date':'OUTDATED — rerun analysis before relying on these results.'}`);

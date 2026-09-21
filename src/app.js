@@ -68,7 +68,7 @@ $('import-form').onsubmit=async e=>{e.preventDefault();const items=parseTranscri
   $('import-dialog').close();$('import-text').value='';notice(`Imported ${items.length} statements.`);
 };
 document.querySelectorAll('[data-export]').forEach(b=>b.onclick=async()=>{try{
-  const type=b.dataset.export,stem=session.title.replace(/[^a-z0-9]/gi,'_').slice(0,70)||'ReqAI_report';
+  const type=b.dataset.export,stem=session.title.replace(/[^a-z0-9]/gi,'_').slice(0,70)||'Clariflow_report';
   if(type==='pdf'){
     const id=crypto.randomUUID();const stored=await chrome.storage.session.get('reports');const reports=Object.fromEntries(Object.entries(stored.reports||{}).slice(-2));reports[id]=structuredClone(session);await chrome.storage.session.set({reports});await chrome.tabs.create({url:chrome.runtime.getURL(`report.html?id=${id}`)});
   }else if(type==='txt')download(new Blob([textReport(session)],{type:'text/plain;charset=utf-8'}),stem+'.txt');

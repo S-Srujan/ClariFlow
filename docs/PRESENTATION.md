@@ -2,7 +2,7 @@
 
 ## A concise project introduction
 
-“ReqAI is a Chrome extension that assists requirements gathering during a Zoom web meeting. It reads visible transcript text, identifies ambiguity, asks the analyst useful clarification questions, and uses recorded stakeholder answers to draft functional and non-functional requirements. Every requirement retains its evidence, and the system compares the original and refined versions using the same transparent rubric.”
+“Clariflow is a Chrome extension that assists requirements gathering during a Zoom web meeting. It reads visible transcript text, identifies ambiguity, asks the analyst useful clarification questions, and uses recorded stakeholder answers to draft functional and non-functional requirements. Every requirement retains its evidence, and the system compares the original and refined versions using the same transparent rubric.”
 
 ## An 8–10 minute demonstration
 

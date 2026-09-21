@@ -32,7 +32,7 @@ No dependency installation is needed. At packaging: **20 tests passed**. Tests m
 1. Load the unpacked folder in Chrome. Confirm no extension errors and the toolbar icon opens the workbench side panel.
 2. Open the case study. Confirm 23 statements, seven offline questions and no answered questions. Baseline/refined values should be identical.
 3. Enter a precise performance response with a target and workload. Confirm it survives closing/reopening the panel and appears in the supporting-answer details.
-4. Start a new meeting, join Zoom in a Chrome tab, enable captions, and start capture in ReqAI. Say two distinct statements. Confirm each appears once, in full, with a reasonable speaker label.
+4. Start a new meeting, join Zoom in a Chrome tab, enable captions, and start capture in Clariflow. Say two distinct statements. Confirm each appears once, in full, with a reasonable speaker label.
 5. Pause capture. Speak again and confirm no new statement is added. Switch sessions and confirm old packets do not enter the new session.
 6. Select an AI provider, enter a supported model ID and a real key, enable remote processing, and run a small transcript. Confirm the provider label appears and output references actual transcript IDs.
 7. Test an invalid key/model. Confirm a visible error and no silent switch to offline results. Restore valid settings.

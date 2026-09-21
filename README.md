@@ -1,4 +1,8 @@
-# ReqAI — Requirement Workbench
+# Clariflow
+
+**Turn conversations into clear requirements.**
+
+## About
 
 A complete Chrome Manifest V3 extension for turning meeting transcripts into clarification questions, traceable functional/non-functional requirements, and a before/after review. Built against the supplied **AI-Powered Chrome Extension for Real-Time Requirement Analysis** assignment.
 
@@ -6,8 +10,8 @@ A complete Chrome Manifest V3 extension for turning meeting transcripts into cla
 
 1. Extract the distribution ZIP if necessary.
 2. In Chrome, open `chrome://extensions`.
-3. Enable **Developer mode**, choose **Load unpacked**, and select this **reqai-extension** folder (the one containing `manifest.json`).
-4. Pin ReqAI from Chrome's extension menu. Click the icon to open the side panel.
+3. Enable **Developer mode**, choose **Load unpacked**, and select this **clariflow-extension** folder (the one containing `manifest.json`).
+4. Pin Clariflow from Chrome's extension menu. Click the icon to open the side panel.
 5. Click **Explore assignment case study**. No account or API key is needed for the offline demonstration.
 6. Open **Clarifications**, enter an answer, and inspect **Requirements** and **Quality review**.
 7. Use **Reports & exports** to produce PDF, genuine DOCX, TXT, or JSON.
@@ -47,12 +51,12 @@ Missing keys, timeouts, quota failures, refusals and malformed responses appear 
 
 ## Live Zoom workflow
 
-1. Start a new named meeting session in ReqAI.
+1. Start a new named meeting session in Clariflow.
 2. Join the meeting using the **Zoom web client** at a `zoom.us` host in Chrome.
 3. Enable visible captions or open the transcript panel in Zoom.
-4. With the Zoom tab selected, open ReqAI's side panel and click **Start Zoom capture**.
+4. With the Zoom tab selected, open Clariflow's side panel and click **Start Zoom capture**.
 5. The Zoom page badge should show **Capturing captions**. The workbench should show a recent received-batch time and new statements.
-6. Read each clarification question aloud yourself, then record the actual stakeholder response in ReqAI.
+6. Read each clarification question aloud yourself, then record the actual stakeholder response in Clariflow.
 7. Pause capture when finished. Wait for the latest analysis, inspect open issues, and export.
 
 **This extension reads text already rendered by Zoom. It does not record microphone audio, perform speech recognition, speak questions, or automatically identify an answer in later speech.** It does not work inside the native Zoom desktop client. If you installed/reloaded the extension while Zoom was already open, reload that Zoom tab before testing. Caption DOM selectors vary between Zoom versions; TXT/VTT import remains available if a particular layout is unsupported.
